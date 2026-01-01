@@ -57,13 +57,15 @@ int main() {
     Process normal_proc = {{50, 50, 50, 50, 50}};
     Process attack_proc = {{5, 95, 5, 95, 5}}; // Very different from training data
 
-    int normal_path = get_path_length(root, normal_proc, 0);
-    int attack_path = get_path_length(root, attack_proc, 0);
+    int normal_depth = get_path_length(root, normal_proc, 0);
+    int attack_depth = get_path_length(root, attack_proc, 0);
 
-    printf("Normal Process Path Length: %d (Deep = Normal)\n", normal_path);
-    printf("Attack Process Path Length: %d (Shallow = Anomaly)\n", attack_path);
 
-    if (attack_path < normal_path) printf("\nALERT: Intrusion Detected!\n");
+    printf("Normal Process Path Length: %d (Deep = Normal)\n", normal_depth);
+    printf("Attack Process Path Length: %d (Shallow = Anomaly)\n", attack_depth);
+
+    if (attack_depth < normal_depth) printf("\nALERT: Intrusion Detected!\n");
 
     return 0;
+
 }
