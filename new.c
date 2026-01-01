@@ -20,13 +20,15 @@ typedef struct Node {
     struct Node *left, *right;
 } Node;
 
-// Utility: Harmonic number & c-factor for anomaly scoring
+//  Computes normalization factor c(n) used in Isolation Forest
+// Helps convert path length into anomaly score
 double c_factor(int n) {
     if (n <= 1) return 0.0;
     return 2.0 * (log(n - 1) + 0.5772156649) - (2.0 * (n - 1.0) / n);
 }
 
-// Logic: Build the Isolation Tree
+// Builds an isolation tree recursively
+// Randomly selects a system call feature and split value
 Node* build_tree(Process *data, int *idx, int n, int depth) {
     Node *node = calloc(1, sizeof(Node));
     node->size = n;
@@ -89,4 +91,5 @@ int main() {
         printf("%.4f\t%s\t%s\n", score, score >= THRESHOLD ? "ALERT" : "OK", test[i].is_anomaly ? "ATTACK" : "NORMAL");
     }
     return 0;
+
 }
